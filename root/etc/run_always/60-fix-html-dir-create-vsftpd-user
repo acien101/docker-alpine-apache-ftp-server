@@ -1,5 +1,15 @@
 #!/bin/sh
 
+# copy index.html if html directory does not exists
+
+if [ ! -d /web/html ]; then
+  mkdir /web/html
+  cp -rp /etc/apache2/html/* /web/html
+  chown -R apache.www-data /web/html
+fi
+
+# Create vsftpd stuff
+
 #Remove all ftp users
 grep '/ftp/' /etc/passwd | cut -d':' -f1 | xargs -n 1 deluser
 
