@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ -z "$MIN_PORT" ]; then
+  MIN_PORT=21000
+fi
+
+if [ -z "$MAX_PORT" ]; then
+  MAX_PORT=21010
+fi
+
+if [ ! -z "$ADDRESS" ]; then
+  ADDR_OPT="-opasv_address=$ADDRESS"
+fi
+
+#Used to run custom commands inside container
+exec /usr/sbin/vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT $ADDR_OPT /etc/vsftpd/vsftpd.conf
