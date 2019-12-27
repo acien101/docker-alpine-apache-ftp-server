@@ -4,5 +4,6 @@
 
 if [ ! -d /web/html ]; then
   mkdir /web/html
+  cp -rp /etc/apache2/html/* /web/html
   chown -R apache.www-data /web/html
 fi
