@@ -26,6 +26,25 @@ This will start the container with apache and vsftpd process running, to access 
 ```
 	docker exec -ti apache-ftp-server /bin/sh
 ```
+
+
+
+If you want to create volumes, the volume folder must be owned by root and have 755 permissions. For example:
+
+```
+# mkdir /vol
+# chmod 755 /vol
+# chown root:root /vol
+# /usr/bin/docker run --rm --name "archive_ftp" \
+-v "/vol":/web/html/ftp \
+-p "21:21" \
+-p "80:80" \
+-p "21000-21010:21000-21010" \
+-e USERS="one|123|/web/html/ftp/one|4445" \
+-e ADDRESS="localhost" \
+"acien101/alpine-apache-ftp-server"
+
+```
 ---
 
 ## FTP Configuration

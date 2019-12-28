@@ -4,9 +4,9 @@
 
 if [ ! -d /web/html ]; then
   mkdir /web/html
-  cp -rp /etc/apache2/html/* /web/html
-  chown -R apache.www-data /web/html
 fi
+cp -rp /etc/apache2/html/* /web/html
+chown -R apache.www-data /web/html
 
 # Create vsftpd stuff
 
@@ -36,7 +36,7 @@ for i in $USERS ; do
 
   # Home folder on /web/html Other posibility is to use syslinks, but on volumes with docker doesnt work fine
   if [ -z "$FOLDER" ]; then
-    FOLDER="/web/html/$NAME"
+    FOLDER="/web/html/ftp/$NAME"
   fi
 
   if [ ! -z "$UID" ]; then
@@ -49,6 +49,7 @@ for i in $USERS ; do
 
   # APACHE STUFF
   addgroup $NAME www-data
+  addgroup $NAME apache
 
   unset NAME PASS FOLDER UID
 done

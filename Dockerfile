@@ -3,7 +3,6 @@ FROM nimmis/alpine-micro
 MAINTAINER nimmis <kjell.havneskold@gmail.com>
 
 COPY root/. /
-COPY start_vsftpd.sh /bin/start_vsftpd.sh
 
 RUN apk update && apk -U upgrade -a && \
 
@@ -12,6 +11,8 @@ RUN apk update && apk -U upgrade -a && \
 
     apk add apache2 libxml2-dev apache2-utils vsftpd && \
     mkdir /web/ && chown -R apache.www-data /web && \
+
+    mkdir /web/html/ && chown -R apache.www-data /web/html && \
 
     sed -i 's#PidFile "/run/.*#Pidfile "/web/run/httpd.pid"#g'  /etc/apache2/conf.d/mpm.conf && \
 
