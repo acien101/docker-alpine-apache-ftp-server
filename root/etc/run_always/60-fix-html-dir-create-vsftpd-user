@@ -34,8 +34,9 @@ for i in $USERS ; do
   FOLDER=$(echo $i | cut -d'|' -f3)
      UID=$(echo $i | cut -d'|' -f4)
 
+  # Home folder on /web/html Other posibility is to use syslinks, but on volumes with docker doesnt work fine
   if [ -z "$FOLDER" ]; then
-    FOLDER="/ftp/$NAME"
+    FOLDER="/web/html/$NAME"
   fi
 
   if [ ! -z "$UID" ]; then
@@ -48,12 +49,6 @@ for i in $USERS ; do
 
   # APACHE STUFF
   addgroup $NAME www-data
-
-  #Create a symbolic link to $FOLDER
-  ln -s $FOLDER /web/html/$NAME
-
-  # Reload apache2
-
 
   unset NAME PASS FOLDER UID
 done

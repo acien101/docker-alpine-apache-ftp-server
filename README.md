@@ -30,6 +30,8 @@ This will start the container with apache and vsftpd process running, to access 
 
 ## FTP Configuration
 
+By default, FTP files are saved on /web/html So you can put your volume there. You can put the home folder on other place, but you have to create a syslink, but docker doesnt support syslinks to volumes.
+
 Environment variables:
 - `USERS` - space and `|` separated list (optional, default: `ftp|alpineftp`)
   - format `name1|password1|[folder1][|uid1] name2|password2|[folder2][|uid2]`
